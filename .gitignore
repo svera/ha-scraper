@@ -1,0 +1,6 @@
+/epublibre_cache
+epublibre
+epl-scraper
+*.epub
+*.db
+*.log
