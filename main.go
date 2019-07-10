@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.com/sergiovera/ha-scraper/cmd"
+	"github.com/svera/ha-scraper/cmd"
 )
 
 func main() {

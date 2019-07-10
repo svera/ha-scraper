@@ -11,7 +11,7 @@ import (
 
 	"github.com/gocolly/colly"
 	"github.com/spf13/cobra"
-	"gitlab.com/sergiovera/ha-scraper/providers"
+	"github.com/svera/ha-scraper/providers"
 )
 
 var maxDate string
