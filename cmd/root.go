@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/cheggaaa/pb/v3"
 	"github.com/gocolly/colly"
 	"github.com/spf13/cobra"
 	"github.com/svera/ha-scraper/providers"
@@ -49,12 +50,19 @@ var rootCmd = &cobra.Command{
 		if err != nil {
 			log.Println(err.Error())
 		}
-		log.Printf("Downloading %d files\n...", len(files))
+		bar := pb.StartNew(len(files))
+		log.Printf("Downloading %d files...\n", len(files))
 		downloaded := 0
 		for url, fileName := range files {
-			downloadFile(fileName+".jpg", url)
-			downloaded++
+			if err := downloadFile(fileName+".jpg", url); err != nil {
+				log.Println(err.Error())
+			} else {
+				downloaded++
+			}
+			bar.Increment()
+			//log.Printf("Downloaded %s\n", fileName+".jpg")
 		}
+		bar.Finish()
 		end := time.Now()
 		log.Printf("Scraping finished at %02d:%02d:%02d, %d images downloaded", end.Hour(), end.Minute(), end.Second(), downloaded)
 	},
